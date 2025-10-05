@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficient Detection of Tampered Images Using CNN</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="logo-square"></div>
+                    <div class="logo-circle"></div>
+                </div>
+                <h1>Efficient Detection of Tampered Images Using CNN</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#detection">Detection</a></li>
+                    <li><a href="#research">Research</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Efficient Detection of Tampered Images Using CNN</h1>
+                <p>Advanced deep learning technology to identify manipulated images with high accuracy</p>
+                <div class="hero-buttons">
+                    <a href="#detection" class="btn btn-primary">Try Detection</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-container">
+                    <div class="image-overlay"></div>
+                    <div class="image-grid">
+                        <div class="grid-item authentic">Authentic</div>
+                        <div class="grid-item tampered">Tampered</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Our Technology</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Our image forgery detection system uses Convolutional Neural Networks (CNNs) to identify manipulated images with 99.85% validation accuracy and 93.33% overall classification accuracy.</p>
+                    <p>The system can detect various types of image tampering including:</p>
+                    <ul>
+                        <li>Copy-move forgery</li>
+                        <li>Image splicing</li>
+                        <li>Retouching</li>
+                        <li>Resampling</li>
+                        <li>Morphing</li>
+                    </ul>
+                    <p>Using advanced preprocessing techniques like Error Level Analysis (ELA), image denoising, and Gaussian noise injection, our model outperforms traditional methods and even RNN-based approaches.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">99.85%</div>
+                        <div class="stat-label">Validation Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">93.33%</div>
+                        <div class="stat-label">Classification Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">97.60%</div>
+                        <div class="stat-label">Precision</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">88.21%</div>
+                        <div class="stat-label">F1 Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="detection" class="detection">
+        <div class="container">
+            <h2>Image Forgery Detection</h2>
+            <div class="detection-content">
+                <div class="upload-container">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 16L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 11L12 8 15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 16.7428C21.2215 15.734 22 14.2079 22 12.5C22 9.46243 19.5376 7 16.5 7C16.2815 7 16.0771 6.886 15.9661 6.69774C14.6621 4.48484 12.2544 3 9.5 3C5.35786 3 2 6.35786 2 10.5C2 12.5661 2.83545 14.4371 4.18695 15.7935" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 16H16V21H8V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p>Drag & drop your image here or <span class="browse-text">browse</span></p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+                    <button class="btn btn-primary" id="analyzeBtn" disabled>Analyze Image</button>
+                </div>
+                <div class="results-container" id="resultsContainer">
+                    <div class="results-header">
+                        <h3>Analysis Results</h3>
+                        <div class="results-tabs">
+                            <button class="tab-btn active" data-tab="summary">Summary</button>
+                            <button class="tab-btn" data-tab="ela">ELA View</button>
+                            <button class="tab-btn" data-tab="heatmap">Heatmap</button>
+                        </div>
+                    </div>
+                    <div class="results-content">
+                        <div class="tab-content active" id="summary">
+                            <div class="result-placeholder">
+                                <p>Upload an image to see analysis results</p>
+                            </div>
+                            <div class="result-data" style="display: none;">
+                                <div class="result-images">
+                                    <div class="original-image">
+                                        <h4>Original Image</h4>
+                                        <div class="image-preview" id="originalPreview"></div>
+                                    </div>
+                                    <div class="analyzed-image">
+                                        <h4>Analysis Visualization</h4>
+                                        <div class="image-preview" id="analyzedPreview"></div>
+                                    </div>
+                                </div>
+                                <div class="result-details">
+                                    <div class="result-verdict" id="resultVerdict">
+                                        <!-- Will be filled by JS -->
+                                    </div>
+                                    <div class="confidence-meter">
+                                        <h4>Confidence Level</h4>
+                                        <div class="meter-container">
+                                            <div class="meter-bar" id="confidenceMeter"></div>
+                                            <span class="meter-value" id="confidenceValue">0%</span>
+                                        </div>
+                                    </div>
+                                    <div class="detection-details">
+                                        <h4>Detection Details</h4>
+                                        <ul id="detectionDetails">
+                                            <!-- Will be filled by JS -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="ela">
+                            <div class="ela-explanation">
+                                <h4>Error Level Analysis (ELA)</h4>
+                                <p>ELA identifies areas that have different compression levels in the image. Manipulated regions often show different error levels.</p>
+                            </div>
+                            <div class="ela-preview" id="elaPreview">
+                                <!-- Will be filled by JS -->
+                            </div>
+                        </div>
+                        <div class="tab-content" id="heatmap">
+                            <div class="heatmap-explanation">
+                                <h4>Tampering Probability Heatmap</h4>
+                                <p>This visualization shows areas with higher probability of manipulation in warmer colors.</p>
+                            </div>
+                            <div class="heatmap-preview" id="heatmapPreview">
+                                <!-- Will be filled by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="research">
+        <div class="container">
+            <h2>Research & Methodology</h2>
+            <div class="research-content">
+                <div class="methodology">
+                    <h3>Our Approach</h3>
+                    <div class="methodology-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Data Collection</h4>
+                                <p>Using the CASIA 2.0 Image Tampering Detection Dataset with 7,491 authentic and tampered images.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Preprocessing</h4>
+                                <p>Applying Error Level Analysis (ELA), image resizing, denoising, and Gaussian noise injection.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>CNN Architecture</h4>
+                                <p>Implementing a specialized CNN with convolutional layers, pooling, and dropout for robust feature extraction.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Training & Evaluation</h4>
+                                <p>Training on augmented data and evaluating using precision, recall, accuracy, and F1-score metrics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="model-architecture">
+                    <h3>CNN Model Architecture</h3>
+                    <div class="architecture-diagram">
+                        <div class="layer input-layer">
+                            <div class="layer-label">Input Image</div>
+                            <div class="layer-box">128×128×3</div>
+                        </div>
+                        <div class="layer conv-layer">
+                            <div class="layer-label">Conv2D</div>
+                            <div class="layer-box">32 filters (5×5)</div>
+                        </div>
+                        <div class="layer pool-layer">
+                            <div class="layer-label">MaxPooling</div>
+                            <div class="layer-box">2×2</div>
+                        </div>
+                        <div class="layer conv-layer">
+                            <div class="layer-label">Conv2D</div>
+                            <div class="layer-box">32 filters (5×5)</div>
+                        </div>
+                        <div class="layer pool-layer">
+                            <div class="layer-label">MaxPooling</div>
+                            <div class="layer-box">2×2</div>
+                        </div>
+                        <div class="layer flatten-layer">
+                            <div class="layer-label">Flatten</div>
+                        </div>
+                        <div class="layer dense-layer">
+                            <div class="layer-label">Dense</div>
+                            <div class="layer-box">256 neurons</div>
+                        </div>
+                        <div class="layer dropout-layer">
+                            <div class="layer-label">Dropout</div>
+                            <div class="layer-box">0.5</div>
+                        </div>
+                        <div class="layer output-layer">
+                            <div class="layer-label">Output</div>
+                            <div class="layer-box">2 neurons (Softmax)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <div class="logo-square"></div>
+                            <div class="logo-circle"></div>
+                        </div>
+                        <h2>Efficient Detection of Tampered Images Using CNN</h2>
+                    </div>
+                    <p>Advanced image forgery detection using CNN technology</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#detection">Detection</a></li>
+                            <li><a href="#research">Research</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Research Paper</a></li>
+                            <li><a href="#">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="mailto:contact@imageforensics.com">Email Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Efficient Detection of Tampered Images Using CNN - Image Forgery Detection. All rights reserved.</p>
+                <p>Developed by Rajesh Bacchala, Dinesh Babu Kommathoti, Gopi Marri,Venkata Manohar Tinnavalli, Sireesha Kambhampati, Jhansi Vazram Bolla</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
